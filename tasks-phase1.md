@@ -16,16 +16,24 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     1. Modify tasks-phase1.md file.
     
     2. Create PR from this branch to **YOUR** master and merge it to make new release. 
-    
+    ![alt text](image-2.png)
+    ![alt text](image-1.png)
     ***place the screenshot from GA after succesfull application of release***
 
 
 5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
+    ![alt text](image.png)
+    Ten moduł Terraform tworzy w projekcie Google Cloud repozytorium Dockerowe w Artifact Registry. Najpierw włącza potrzebną usługę Artifact Registry, żeby można było tworzyć repozytoria. Potem tworzy właściwe repozytorium w regionie europe i pozwala na nadpisywanie tagów obrazów. Moduł generuje też nazwę hosta rejestru na podstawie podanej lokalizacji. Na końcu udostępnia tę nazwę jako output, żeby można było używać jej w innych częściach infrastruktury.
 
     ***describe one selected module and put the output of terraform graph for this module here***
    
 6. Reach YARN UI
-   
+
+   ![alt text](image-3.png)
+   ```gcloud compute ssh tbd-cluster-m \
+      --project=tbd-2025z-318384 \
+      -- -L 8088:localhost:8088
+    ```
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
    
 7. Draw an architecture diagram (e.g. in draw.io) that includes:
