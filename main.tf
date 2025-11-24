@@ -143,12 +143,36 @@ module "dataproc" {
 #   }
 # }
 
-resource "google_compute_firewall" "allow-all-internal" {
-  name    = "allow-all-internal"
-  project = var.project_name
-  network = module.vpc.network.network_name
-  allow {
-    protocol = "all"
+#checkov:skip=CKV_GCP_38: "Testowa VM do warsztatu, bez CSEK - nie jest to krytyczna maszyna"
+resource "google_compute_instance" "cost-test" {
+  name         = "cost-test"
+  project      = var.project_name
+  machine_type = "e2-standard-4"
+  zone         = "europe-west1-b"
+
+  # CKV_GCP_32: blokujemy globalne SSH keys
+  metadata = {
+    block-project-ssh-keys = "true"
   }
-  source_ranges = ["10.0.0.0/8"]
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+    }
+    # tu można by dodać CSEK/CMEK, ale dla warsztatu to overkill
+  }
+
+  # CKV_GCP_39: włączamy Shielded VM
+  shielded_instance_config {
+    enable_secure_boot          = true
+    enable_vtpm                 = true
+    enable_integrity_monitoring = true
+  }
+
+  network_interface {
+    network = module.vpc.network.network_id
+
+    # CKV_GCP_40: NIE dodajemy access_config => brak publicznego IP
+    # access_config {}  # usuwamy tę linię
+  }
 }
