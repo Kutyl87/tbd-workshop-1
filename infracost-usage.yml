@@ -6,7 +6,7 @@ resource_usage:
   google_storage_bucket.dataproc_staging:
     storage_gb: 150
   google_storage_bucket.dataproc_temp:
-    storage_gb: 150
-    monthly_egress_data_transfer_gb: 150
+    storage_gb: 500
+    monthly_egress_data_transfer_gb: 300
   google_service_networking_connection.private_vpc_connection:
     monthly_egress_data_transfer_gb: 150
