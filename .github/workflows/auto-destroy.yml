@@ -1,4 +1,4 @@
-name: Destroy
+name: Auto-destroy
 on:
   schedule:
     - cron: "0 20 * * *"
