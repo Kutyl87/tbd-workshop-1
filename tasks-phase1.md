@@ -155,6 +155,6 @@ jobs:
       continue-on-error: false
 ```
 ***paste screenshot/log snippet confirming the auto-destroy ran***
-
+![alt text](image-8.png)
 ***write one sentence why scheduling cleanup helps in this workshop***
 Scheduling automatic cleanup ensures that all temporary workshop resources are regularly destroyed, preventing leftover infrastructure from generating unexpected costs.
