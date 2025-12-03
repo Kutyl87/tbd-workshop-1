@@ -11,6 +11,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 2. Follow all steps in README.md.
 
 3. From avaialble Github Actions select and run destroy on main branch.
+
    
 4. Create new git branch and:
     1. Modify tasks-phase1.md file.
@@ -38,15 +39,26 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
    
 7. Draw an architecture diagram (e.g. in draw.io) that includes:
     1. Description of the components of service accounts
+      - tbd-2025z-318384-lab@tbd-2025z-318384.iam.gserviceaccount.com -> Owner
+      - 82368003320-compute@developer.gserviceaccount.com - editor
+      - tbd-bucket-admin@tbd-2025z-318384.iam.gserviceaccount.com -> Storage Object Admin
+      - tbd-2025z-318384-dataproc-sa@tbd-2025z-318384.iam.gserviceaccount.com -> BigQuery User, Dataproc Worker, BigQuery Data Editor
     2. List of buckets for disposal
-    
+    - tbd-2025z-318384-dataproc-staging
+    - tbd-2025z-318384-dataproc-temp
+    - tbd-2025z-318384-state
+    - tbd-318384z-data
+
     ***place your diagram here***
+  Diagram:
+
+  ![alt text](diagram.drawio.png)
 
 8. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml) 
 
-   `
+  ```
   google_artifact_registry_repository.registry:
     storage_gb: 150
     monthly_egress_data_transfer_gb: 50
@@ -57,7 +69,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     monthly_egress_data_transfer_gb: 150
   google_service_networking_connection.private_vpc_connection:
     monthly_egress_data_transfer_gb: 150
-    `
+  ```
 
    ***place the expected consumption you entered here***
    ![alt text](image-5.png)
@@ -68,13 +80,15 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     ***place the code and output here***
     ```
     CREATE OR REPLACE EXTERNAL TABLE
-  `tbd-2025z-318384`.tbddataset.external_orc_table( column_a STRING,
+    tbd-2025z-318384.tbddataset.external_orc_table( column_a STRING,
     column_b INT64,
     column_c TIMESTAMP) OPTIONS ( format = 'ORC',
     uris = ['gs://tbd-318384z-data/*.orc']);
     ```
    ![alt text](image-6.png)
+
     ***why does ORC not require a table schema?***
+    
     Schema is automatically retrieved from the self-describing source data.
 10. Find and correct the error in spark-job.py
     ***describe the cause and how to find the error***
