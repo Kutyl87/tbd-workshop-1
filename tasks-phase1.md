@@ -5,10 +5,12 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 1. Authors:
 
    ***18*** / ***15***
-   Paweł Kutyla 
-   Dawid Budzyński
-   Filip Budzyński
+   - Paweł Kutyla 
+   - Dawid Budzyński
+   - Filip Budzyński
+   
    main repo: ***https://github.com/Kutyl87/tbd-workshop-1***
+
    additional repo: https://github.com/FilipBudzynski/tbd-workshop-1
    
 2. Follow all steps in README.md.
