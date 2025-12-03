@@ -5,18 +5,20 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 1. Authors:
 
    ***18*** / ***15***
-   Paweł Kutyla 
-   Dawid Budzyński
-   Filip Budzyński
+   - Paweł Kutyla 
+   - Dawid Budzyński
+   - Filip Budzyński
+   
    main repo: ***https://github.com/Kutyl87/tbd-workshop-1***
+   
    additional repo: https://github.com/FilipBudzynski/tbd-workshop-1
    
-2. Follow all steps in README.md.
+3. Follow all steps in README.md.
 
-3. From avaialble Github Actions select and run destroy on main branch.
+4. From avaialble Github Actions select and run destroy on main branch.
 
    
-4. Create new git branch and:
+5. Create new git branch and:
     1. Modify tasks-phase1.md file.
     
     2. Create PR from this branch to **YOUR** master and merge it to make new release. 
@@ -25,24 +27,22 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     ***place the screenshot from GA after succesfull application of release***
 
 
-5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
+6. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
     ![alt text](images/image.png)
-    
-This Terraform module creates a Docker repository in Artifact Registry within the Google Cloud project. First, it enables the required Artifact Registry service so that repositories can be created. Then, it creates the actual repository in the europe region and allows image tags to be overwritten. The module also generates the registry host name based on the provided location. Finally, it exposes this host name as an output so it can be used in other parts of the infrastructure.
+    Ten moduł Terraform tworzy w projekcie Google Cloud repozytorium Dockerowe w Artifact Registry. Najpierw włącza potrzebną usługę Artifact Registry, żeby można było tworzyć repozytoria. Potem tworzy właściwe repozytorium w regionie europe i pozwala na nadpisywanie tagów obrazów. Moduł generuje też nazwę hosta rejestru na podstawie podanej lokalizacji. Na końcu udostępnia tę nazwę jako output, żeby można było używać jej w innych częściach infrastruktury.
 
     ***describe one selected module and put the output of terraform graph for this module here***
    
-6. Reach YARN UI
+7. Reach YARN UI
 
    ![alt text](images/image-3.png)
-   ```bash
-   gcloud compute ssh tbd-cluster-m \
+   ```gcloud compute ssh tbd-cluster-m \
       --project=tbd-2025z-318384 \
       -- -L 8088:localhost:8088
     ```
    ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
    
-7. Draw an architecture diagram (e.g. in draw.io) that includes:
+8. Draw an architecture diagram (e.g. in draw.io) that includes:
     1. Description of the components of service accounts
       - tbd-2025z-318384-lab@tbd-2025z-318384.iam.gserviceaccount.com -> Owner
       - 82368003320-compute@developer.gserviceaccount.com - editor
@@ -63,7 +63,7 @@ This Terraform module creates a Docker repository in Artifact Registry within th
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml) 
 
-  ```yml
+  ```
   google_artifact_registry_repository.registry:
     storage_gb: 150
     monthly_egress_data_transfer_gb: 50
@@ -83,7 +83,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 9. Create a BigQuery dataset and an external table using SQL
     
     ***place the code and output here***
-    ```sql
+    ```
     CREATE OR REPLACE EXTERNAL TABLE
     tbd-2025z-318384.tbddataset.external_orc_table( column_a STRING,
     column_b INT64,
@@ -104,7 +104,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     6. successful run
 
     The cause of the error:
-    ```bash
+    ```
     ERROR: (gcloud.dataproc.jobs.submit.pyspark) Job [d193bf60d00541e18364bb1686934c78] failed with error:
     Google Cloud Dataproc Agent reports job failure. If logs are available, they can be found at:
     https://console.cloud.google.com/dataproc/jobs/d193bf60d00541e18364bb1686934c78?project=tbd-2025z-318384&region=europe-west1
@@ -139,7 +139,7 @@ Steps:
   3. Test the trigger (schedule or cleanup-tagged PR)
      
 ***paste workflow YAML here***
-```yml
+```
 name: Destroy
 on:
   schedule:
@@ -182,5 +182,4 @@ jobs:
 ***paste screenshot/log snippet confirming the auto-destroy ran***
 ![alt text](images/image-8.png)
 ***write one sentence why scheduling cleanup helps in this workshop***
-
 Scheduling automatic cleanup ensures that all temporary workshop resources are regularly destroyed, preventing leftover infrastructure from generating unexpected costs.
