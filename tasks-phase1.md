@@ -4,9 +4,12 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 1. Authors:
 
-   ***18***
-
-   ***https://github.com/Kutyl87/tbd-workshop-1***
+   ***18*** / ***15***
+   Paweł Kutyla 
+   Dawid Budzyński
+   Filip Budzyński
+   main repo: ***https://github.com/Kutyl87/tbd-workshop-1***
+   additional repo: https://github.com/FilipBudzynski/tbd-workshop-1
    
 2. Follow all steps in README.md.
 
@@ -91,7 +94,13 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     
     Schema is automatically retrieved from the self-describing source data.
 10. Find and correct the error in spark-job.py
-    ***describe the cause and how to find the error***
+    1. Go to gcp dataproc jobs 
+    2. See the failing job and investigate logs. 
+    3. There is not existing bucket "tbd-2025z-9901-data"
+    4. Replace bucket name to "gs://tbd-2025z-319020-data/data/shakespeare/"
+    5. clone job 
+    6. successful run
+
     The cause of the error:
     ```
     ERROR: (gcloud.dataproc.jobs.submit.pyspark) Job [d193bf60d00541e18364bb1686934c78] failed with error:
