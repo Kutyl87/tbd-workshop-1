@@ -1,6 +1,6 @@
 IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each work session. You can recreate infrastructure by creating new PR and merging it to master.
   
-![img.png](doc/figures/destroy.png)
+![images/img.png](doc/figures/destroy.png)
 
 1. Authors:
 
@@ -17,20 +17,20 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     1. Modify tasks-phase1.md file.
     
     2. Create PR from this branch to **YOUR** master and merge it to make new release. 
-    ![alt text](image-2.png)
-    ![alt text](image-1.png)
+    ![alt text](images/image-2.png)
+    ![alt text](images/image-1.png)
     ***place the screenshot from GA after succesfull application of release***
 
 
 5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
-    ![alt text](image.png)
+    ![alt text](images/image.png)
     Ten moduł Terraform tworzy w projekcie Google Cloud repozytorium Dockerowe w Artifact Registry. Najpierw włącza potrzebną usługę Artifact Registry, żeby można było tworzyć repozytoria. Potem tworzy właściwe repozytorium w regionie europe i pozwala na nadpisywanie tagów obrazów. Moduł generuje też nazwę hosta rejestru na podstawie podanej lokalizacji. Na końcu udostępnia tę nazwę jako output, żeby można było używać jej w innych częściach infrastruktury.
 
     ***describe one selected module and put the output of terraform graph for this module here***
    
 6. Reach YARN UI
 
-   ![alt text](image-3.png)
+   ![alt text](images/image-3.png)
    ```gcloud compute ssh tbd-cluster-m \
       --project=tbd-2025z-318384 \
       -- -L 8088:localhost:8088
@@ -52,7 +52,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
     ***place your diagram here***
   Diagram:
 
-  ![alt text](diagram.drawio.png)
+  ![alt text](images/diagram.drawio.png)
 
 8. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
@@ -72,7 +72,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
   ```
 
    ***place the expected consumption you entered here***
-   ![alt text](image-5.png)
+   ![alt text](images/image-5.png)
    ***place the screenshot from infracost output here***
 
 9. Create a BigQuery dataset and an external table using SQL
@@ -85,10 +85,10 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     column_c TIMESTAMP) OPTIONS ( format = 'ORC',
     uris = ['gs://tbd-318384z-data/*.orc']);
     ```
-   ![alt text](image-6.png)
+   ![alt text](images/image-6.png)
 
     ***why does ORC not require a table schema?***
-    
+
     Schema is automatically retrieved from the self-describing source data.
 10. Find and correct the error in spark-job.py
     ***describe the cause and how to find the error***
@@ -102,7 +102,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     gs://tbd-2025z-318384-dataproc-staging/google-cloud-dataproc-metainfo/fc41f046-7fa6-49f5-aa9d-abe950c45c22/jobs/d193bf60d00541e18364bb1686934c78/driveroutput.*
     ```
     The issue is because of the bucket name. After changing it to my own bucket it worked.
-    ![alt text](image-7.png)
+    ![alt text](images/image-7.png)
 11. Add support for preemptible/spot instances in a Dataproc cluster
     path: ```modules/dataproc/main.tf```
     ```
@@ -169,6 +169,6 @@ jobs:
       continue-on-error: false
 ```
 ***paste screenshot/log snippet confirming the auto-destroy ran***
-![alt text](image-8.png)
+![alt text](images/image-8.png)
 ***write one sentence why scheduling cleanup helps in this workshop***
 Scheduling automatic cleanup ensures that all temporary workshop resources are regularly destroyed, preventing leftover infrastructure from generating unexpected costs.
